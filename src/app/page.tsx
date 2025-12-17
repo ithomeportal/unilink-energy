@@ -65,10 +65,51 @@ interface EmissionsData {
   monthlyTrends: MonthlyTrend[];
 }
 
+type TimePeriod = 'last12' | 'ytd' | 'currentYear';
+
 export default function HomePage() {
   const [data, setData] = useState<EmissionsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [timePeriod, setTimePeriod] = useState<TimePeriod>('last12');
+
+  // Calculate period-specific data
+  const periodData = data ? (() => {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth();
+
+    let filteredTrends = data.monthlyTrends;
+
+    if (timePeriod === 'last12') {
+      // Last 12 months
+      filteredTrends = data.monthlyTrends.slice(-12);
+    } else if (timePeriod === 'ytd') {
+      // Year to date
+      filteredTrends = data.monthlyTrends.filter(t => t.year === currentYear);
+    } else {
+      // Current year vs baseline (all data from current year)
+      filteredTrends = data.monthlyTrends.filter(t => t.year === currentYear);
+    }
+
+    const totalStandard = filteredTrends.reduce((sum, t) => sum + t.standardEmissions, 0);
+    const totalActual = filteredTrends.reduce((sum, t) => sum + t.actualEmissions, 0);
+    const totalSaved = filteredTrends.reduce((sum, t) => sum + t.co2Saved, 0);
+    const monthCount = filteredTrends.length;
+
+    return {
+      standardEmissions: totalStandard,
+      actualEmissions: totalActual,
+      co2Saved: totalSaved,
+      percentReduction: totalStandard > 0 ? ((totalStandard - totalActual) / totalStandard) * 100 : 27,
+      monthCount,
+      periodLabel: timePeriod === 'last12'
+        ? 'Last 12 Months'
+        : timePeriod === 'ytd'
+          ? `${currentYear} YTD`
+          : `${currentYear}`,
+    };
+  })() : null;
 
   useEffect(() => {
     async function fetchData() {
@@ -368,27 +409,61 @@ export default function HomePage() {
       {/* Year-over-Year Comparison Section */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full mb-4">
               <Calendar size={18} className="text-blue-600" />
-              <span className="text-blue-700 text-sm font-medium">Year-over-Year Impact</span>
+              <span className="text-blue-700 text-sm font-medium">Environmental Impact Over Time</span>
             </div>
-            <h2 className="heading-2 text-gray-900 mb-4">2024 vs 2025: The Difference Our Policies Make</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Compare our emissions before implementing green carrier requirements (2024) with our current sustainable operations (2025).
+            <h2 className="heading-2 text-gray-900 mb-4">The Difference Our Policies Make</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+              Compare emissions before implementing green carrier requirements with our current sustainable operations.
             </p>
+
+            {/* Time Period Selector */}
+            <div className="inline-flex items-center gap-2 bg-gray-100 p-1 rounded-lg">
+              <button
+                onClick={() => setTimePeriod('last12')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  timePeriod === 'last12'
+                    ? 'bg-white text-green-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Last 12 Months
+              </button>
+              <button
+                onClick={() => setTimePeriod('ytd')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  timePeriod === 'ytd'
+                    ? 'bg-white text-green-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Year to Date
+              </button>
+              <button
+                onClick={() => setTimePeriod('currentYear')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  timePeriod === 'currentYear'
+                    ? 'bg-white text-green-600 shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {new Date().getFullYear()} vs Baseline
+              </button>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* 2024 Baseline */}
+            {/* Industry Baseline */}
             <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-8 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-gray-300/30 rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-gray-500" />
-                  <span className="text-gray-600 font-medium">2024 Baseline</span>
+                  <span className="text-gray-600 font-medium">Industry Baseline</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-6">Before Green Policies</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-6">Without Green Policies</h3>
 
                 <div className="space-y-4">
                   <div className="bg-white/60 rounded-lg p-4">
@@ -402,9 +477,9 @@ export default function HomePage() {
                     <p className="text-xs text-gray-500">Units up to 15+ years old</p>
                   </div>
                   <div className="bg-white/60 rounded-lg p-4">
-                    <p className="text-sm text-gray-500 mb-1">Estimated Emissions</p>
-                    <p className="text-2xl font-bold text-gray-800">{formatTons(data.summary.totalStandardEmissions)}</p>
-                    <p className="text-xs text-gray-500">tCO2e (industry standard)</p>
+                    <p className="text-sm text-gray-500 mb-1">Would-Be Emissions</p>
+                    <p className="text-2xl font-bold text-gray-800">{periodData ? formatTons(periodData.standardEmissions) : '-'}</p>
+                    <p className="text-xs text-gray-500">tCO2e ({periodData?.periodLabel})</p>
                   </div>
                 </div>
               </div>
@@ -414,25 +489,25 @@ export default function HomePage() {
             <div className="flex items-center justify-center">
               <div className="bg-green-500 rounded-2xl p-8 text-white text-center shadow-xl transform hover:scale-105 transition-transform">
                 <ArrowUpRight size={48} className="mx-auto mb-4" />
-                <p className="text-4xl font-bold mb-2">{formatPercent(data.summary.percentReduction)}</p>
+                <p className="text-4xl font-bold mb-2">{periodData ? formatPercent(periodData.percentReduction) : '~27%'}</p>
                 <p className="text-green-200 text-sm mb-4">Total Reduction</p>
                 <div className="border-t border-green-400/30 pt-4 mt-4">
-                  <p className="text-2xl font-bold">{formatTons(data.summary.totalCO2Saved)}</p>
+                  <p className="text-2xl font-bold">{periodData ? formatTons(periodData.co2Saved) : '-'}</p>
                   <p className="text-green-200 text-sm">tCO2e Saved</p>
                 </div>
                 <div className="mt-6 text-xs text-green-200">
-                  <p>Since March 2025</p>
+                  <p>{periodData?.periodLabel || 'Selected Period'}</p>
                 </div>
               </div>
             </div>
 
-            {/* 2025 Current */}
+            {/* With Green Policies */}
             <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 relative overflow-hidden text-white">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-4">
                   <div className="w-3 h-3 rounded-full bg-green-300" />
-                  <span className="text-green-200 font-medium">2025 Current</span>
+                  <span className="text-green-200 font-medium">{periodData?.periodLabel || 'Current'}</span>
                 </div>
                 <h3 className="text-lg font-semibold mb-6">With Green Policies</h3>
 
@@ -449,8 +524,8 @@ export default function HomePage() {
                   </div>
                   <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
                     <p className="text-sm text-green-200 mb-1">Actual Emissions</p>
-                    <p className="text-2xl font-bold">{formatTons(data.summary.totalActualEmissions)}</p>
-                    <p className="text-xs text-green-200">tCO2e (with policies)</p>
+                    <p className="text-2xl font-bold">{periodData ? formatTons(periodData.actualEmissions) : '-'}</p>
+                    <p className="text-xs text-green-200">tCO2e ({periodData?.periodLabel})</p>
                   </div>
                 </div>
               </div>
