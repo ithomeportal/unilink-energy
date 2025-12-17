@@ -26,7 +26,7 @@ export default function Header() {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-white shadow-lg' : 'bg-primary-900/95 backdrop-blur-sm'
       }`}
     >
       {/* Top bar */}

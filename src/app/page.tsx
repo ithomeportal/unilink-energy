@@ -18,7 +18,11 @@ import {
   ArrowUpRight,
   Shield,
   CheckCircle,
-  ExternalLink
+  ExternalLink,
+  Building2,
+  Zap,
+  GitBranch,
+  Info
 } from 'lucide-react';
 import {
   Chart as ChartJS,
@@ -576,6 +580,182 @@ export default function HomePage() {
                   contribute to our sustainability performance.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GHG Protocol Scopes Section */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full mb-4">
+              <Info size={18} className="text-purple-600" />
+              <span className="text-purple-700 text-sm font-medium">GHG Protocol Framework</span>
+            </div>
+            <h2 className="heading-2 text-gray-900 mb-4">Understanding Our Emissions: Scope 1, 2 & 3</h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              We follow the GHG Protocol Corporate Standard - the world&apos;s most widely used greenhouse gas accounting framework.
+              As a 3PL logistics company, our emissions profile is unique.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Scope 1 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-orange-500 relative">
+              <div className="absolute -top-5 left-8">
+                <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center shadow-lg">
+                  <Building2 size={20} className="text-white" />
+                </div>
+              </div>
+              <div className="mt-4">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Scope 1</h3>
+                <p className="text-sm text-orange-600 font-medium mb-4">Direct Emissions</p>
+                <p className="text-gray-600 text-sm mb-4">
+                  Emissions from sources owned or controlled by the company, such as company vehicles and on-site fuel combustion.
+                </p>
+                <div className="bg-orange-50 rounded-lg p-4">
+                  <p className="text-xs text-gray-500 mb-1">Our Profile</p>
+                  <p className="text-sm font-medium text-gray-800">
+                    As a 3PL, we don&apos;t own trucks. Our Scope 1 is limited to office facilities and any company-owned vehicles.
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-orange-400" />
+                    <span className="text-xs text-gray-600">Minimal impact</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Scope 2 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-yellow-500 relative">
+              <div className="absolute -top-5 left-8">
+                <div className="w-10 h-10 rounded-full bg-yellow-500 flex items-center justify-center shadow-lg">
+                  <Zap size={20} className="text-white" />
+                </div>
+              </div>
+              <div className="mt-4">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Scope 2</h3>
+                <p className="text-sm text-yellow-600 font-medium mb-4">Indirect - Energy</p>
+                <p className="text-gray-600 text-sm mb-4">
+                  Emissions from purchased electricity, steam, heating, and cooling consumed by the company.
+                </p>
+                <div className="bg-yellow-50 rounded-lg p-4">
+                  <p className="text-xs text-gray-500 mb-1">Our Profile</p>
+                  <p className="text-sm font-medium text-gray-800">
+                    Electricity usage in our offices and operations centers. We&apos;re exploring renewable energy options.
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-yellow-400" />
+                    <span className="text-xs text-gray-600">Low-moderate impact</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Scope 3 */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-green-500 relative">
+              <div className="absolute -top-5 left-8">
+                <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shadow-lg">
+                  <GitBranch size={20} className="text-white" />
+                </div>
+              </div>
+              <div className="mt-4">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Scope 3</h3>
+                <p className="text-sm text-green-600 font-medium mb-4">Value Chain Emissions</p>
+                <p className="text-gray-600 text-sm mb-4">
+                  All other indirect emissions in a company&apos;s value chain, including upstream and downstream activities.
+                </p>
+                <div className="bg-green-50 rounded-lg p-4">
+                  <p className="text-xs text-gray-500 mb-1">Our Profile</p>
+                  <p className="text-sm font-medium text-gray-800">
+                    <strong>This is our primary focus.</strong> Contracted carrier emissions represent our largest footprint.
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <span className="text-xs text-green-700 font-medium">Major impact - Actively reducing</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Scope 3 Detailed Breakdown */}
+          <div className="bg-gradient-to-br from-green-600 to-green-700 rounded-2xl p-8 text-white">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-bold mb-4">Our Scope 3 Strategy</h3>
+                <p className="text-green-100 mb-6">
+                  Since we don&apos;t own trucks, we influence emissions through our carrier requirements.
+                  By mandating B20 biodiesel and modern fleets, we reduce Scope 3 Category 4 (Upstream Transportation) emissions.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle size={20} className="text-green-300" />
+                    <span>100% carrier compliance with B20 biodiesel</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle size={20} className="text-green-300" />
+                    <span>All power units under 9 years old</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle size={20} className="text-green-300" />
+                    <span>Real-time emissions tracking & reporting</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle size={20} className="text-green-300" />
+                    <span>Continuous improvement through EcoVadis</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                <h4 className="font-semibold mb-4 text-green-200">Scope 3 Categories We Impact</h4>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span>Category 4: Upstream Transportation</span>
+                      <span className="text-green-300">Primary</span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div className="bg-green-400 h-2 rounded-full" style={{ width: '95%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span>Category 9: Downstream Transportation</span>
+                      <span className="text-green-300">Secondary</span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div className="bg-green-400 h-2 rounded-full" style={{ width: '75%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-sm mb-1">
+                      <span>Category 6: Business Travel</span>
+                      <span className="text-green-300">Minor</span>
+                    </div>
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div className="bg-green-400 h-2 rounded-full" style={{ width: '15%' }} />
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-green-200 mt-4">
+                  Based on GHG Protocol Scope 3 Standard categorization
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Info note */}
+          <div className="mt-8 flex items-start gap-4 bg-blue-50 rounded-xl p-6">
+            <Info size={24} className="text-blue-500 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold text-gray-900">Why Scope 3 Matters for 3PLs</p>
+              <p className="text-gray-600 text-sm">
+                For logistics companies that don&apos;t own their fleet, Scope 3 emissions typically represent
+                <strong> over 90% of total emissions</strong>. By focusing on carrier requirements and tracking,
+                we address the largest portion of our environmental impact where we have the most influence.
+              </p>
             </div>
           </div>
         </div>
