@@ -254,8 +254,8 @@ export default function HomePage() {
 
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                 <Truck size={32} className="text-green-400 mb-3" />
-                <p className="text-4xl font-bold text-white">{formatNumber(data.summary.totalOrders)}</p>
-                <p className="text-gray-300 text-sm">Green Shipments</p>
+                <p className="text-4xl font-bold text-white">100%</p>
+                <p className="text-gray-300 text-sm">Green Carrier Compliance</p>
               </div>
 
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
@@ -280,8 +280,8 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="bg-green-600 rounded-2xl shadow-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center text-white">
-              <p className="text-3xl md:text-4xl font-bold">{formatNumber(data.summary.totalMiles)}</p>
-              <p className="text-green-200 text-sm">Total Green Miles</p>
+              <p className="text-3xl md:text-4xl font-bold">{formatTons(data.summary.totalCO2Saved)}</p>
+              <p className="text-green-200 text-sm">Total CO2 Saved</p>
             </div>
             <div className="text-center text-white">
               <p className="text-3xl md:text-4xl font-bold">{formatTons(data.summary.b20Savings)}</p>
@@ -292,8 +292,8 @@ export default function HomePage() {
               <p className="text-green-200 text-sm">Modern Fleet Savings</p>
             </div>
             <div className="text-center text-white">
-              <p className="text-3xl md:text-4xl font-bold">{data.summary.avgMilesPerOrder}</p>
-              <p className="text-green-200 text-sm">Avg Miles/Shipment</p>
+              <p className="text-3xl md:text-4xl font-bold">{data.summary.stateCount}</p>
+              <p className="text-green-200 text-sm">States Covered</p>
             </div>
           </div>
         </div>
@@ -793,12 +793,12 @@ export default function HomePage() {
               <p className="text-green-300 text-sm">Total tCO2e Saved</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="text-3xl font-bold text-white">{formatNumber(data.summary.totalMiles)}</p>
-              <p className="text-green-300 text-sm">Green Miles</p>
+              <p className="text-3xl font-bold text-white">{formatTons(data.summary.b20Savings)}</p>
+              <p className="text-green-300 text-sm">B20 Savings</p>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
-              <p className="text-3xl font-bold text-white">{formatNumber(data.summary.totalOrders)}</p>
-              <p className="text-green-300 text-sm">Shipments</p>
+              <p className="text-3xl font-bold text-white">{formatTons(data.summary.fleetSavings)}</p>
+              <p className="text-green-300 text-sm">Fleet Savings</p>
             </div>
           </div>
         </div>

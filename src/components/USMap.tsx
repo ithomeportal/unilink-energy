@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from 'react-simple-maps';
 import type { StateEmissions } from '@/lib/types';
-import { formatNumber, formatTons } from '@/lib/emissions';
+import { formatTons } from '@/lib/emissions';
 
 const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
@@ -132,12 +132,12 @@ export default function USMap({ stateEmissions }: USMapProps) {
                 <span className="font-semibold text-green-600">{formatTons(hoveredState.co2Saved)} tCO2e</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Total Miles:</span>
-                <span className="font-medium">{formatNumber(hoveredState.totalMiles)}</span>
+                <span className="text-gray-600">Standard Emissions:</span>
+                <span className="font-medium">{formatTons(hoveredState.standardEmissions)} tCO2e</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Shipments:</span>
-                <span className="font-medium">{formatNumber(hoveredState.orderCount)}</span>
+                <span className="text-gray-600">Actual Emissions:</span>
+                <span className="font-medium">{formatTons(hoveredState.actualEmissions)} tCO2e</span>
               </div>
             </div>
           </div>

@@ -172,14 +172,14 @@ export default function DashboardPage() {
             <p className="text-sm text-gray-500">US States</p>
           </div>
           <div className="card p-6 border-l-4 border-purple-500">
-            <p className="metric-label">Total Miles</p>
-            <p className="metric-value text-purple-600">{formatNumber(data.summary.totalMiles)}</p>
-            <p className="text-sm text-gray-500">Green Miles</p>
+            <p className="metric-label">B20 Savings</p>
+            <p className="metric-value text-purple-600">{formatTons(data.summary.b20Savings)}</p>
+            <p className="text-sm text-gray-500">tCO2e from Biodiesel</p>
           </div>
           <div className="card p-6 border-l-4 border-orange-500">
-            <p className="metric-label">Total Orders</p>
-            <p className="metric-value text-orange-600">{formatNumber(data.summary.totalOrders)}</p>
-            <p className="text-sm text-gray-500">Shipments</p>
+            <p className="metric-label">Fleet Savings</p>
+            <p className="metric-value text-orange-600">{formatTons(data.summary.fleetSavings)}</p>
+            <p className="text-sm text-gray-500">tCO2e from Modern Fleet</p>
           </div>
         </div>
       </div>
@@ -267,25 +267,8 @@ export default function DashboardPage() {
                           {sortKey === 'state' && (sortDirection === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />)}
                         </button>
                       </th>
-                      <th className="py-3 px-4 text-right">
-                        <button
-                          onClick={() => handleSort('orderCount')}
-                          className="flex items-center gap-1 font-semibold text-gray-700 hover:text-green-600 ml-auto"
-                        >
-                          Orders
-                          {sortKey === 'orderCount' && (sortDirection === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />)}
-                        </button>
-                      </th>
-                      <th className="py-3 px-4 text-right">
-                        <button
-                          onClick={() => handleSort('totalMiles')}
-                          className="flex items-center gap-1 font-semibold text-gray-700 hover:text-green-600 ml-auto"
-                        >
-                          Miles
-                          {sortKey === 'totalMiles' && (sortDirection === 'asc' ? <ChevronUp size={16} /> : <ChevronDown size={16} />)}
-                        </button>
-                      </th>
-                      <th className="py-3 px-4 text-right">In/Out Routes</th>
+                      <th className="py-3 px-4 text-right">Standard Emissions</th>
+                      <th className="py-3 px-4 text-right">Actual Emissions</th>
                       <th className="py-3 px-4 text-right">
                         <button
                           onClick={() => handleSort('co2Saved')}
@@ -307,17 +290,11 @@ export default function DashboardPage() {
                             <span className="text-gray-500 text-sm">{state.stateName}</span>
                           </div>
                         </td>
-                        <td className="py-4 px-4 text-right">
-                          <span className="flex items-center justify-end gap-1">
-                            <Truck size={14} className="text-gray-400" />
-                            {formatNumber(state.orderCount)}
-                          </span>
+                        <td className="py-4 px-4 text-right text-gray-600">
+                          {formatTons(state.standardEmissions)} t
                         </td>
                         <td className="py-4 px-4 text-right text-gray-600">
-                          {formatNumber(state.totalMiles)}
-                        </td>
-                        <td className="py-4 px-4 text-right text-gray-600">
-                          <span className="text-green-600">{state.inboundRoutes}</span> / <span className="text-blue-600">{state.outboundRoutes}</span>
+                          {formatTons(state.actualEmissions)} t
                         </td>
                         <td className="py-4 px-4 text-right">
                           <span className="font-semibold text-green-600">{formatTons(state.co2Saved)} t</span>
@@ -345,19 +322,17 @@ export default function DashboardPage() {
 
         {activeTab === 'routes' && (
           <div className="card p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Top 10 Routes by Volume</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-6">Top Routes by Environmental Impact</h3>
 
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-200">
                     <th className="py-3 px-4 text-left font-semibold text-gray-700">Route</th>
-                    <th className="py-3 px-4 text-right font-semibold text-gray-700">Orders</th>
-                    <th className="py-3 px-4 text-right font-semibold text-gray-700">Total Miles</th>
-                    <th className="py-3 px-4 text-right font-semibold text-gray-700">Avg Miles</th>
                     <th className="py-3 px-4 text-right font-semibold text-gray-700">Standard CO2</th>
                     <th className="py-3 px-4 text-right font-semibold text-gray-700">Actual CO2</th>
                     <th className="py-3 px-4 text-right font-semibold text-gray-700">CO2 Saved</th>
+                    <th className="py-3 px-4 text-right font-semibold text-gray-700">Reduction</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -365,7 +340,7 @@ export default function DashboardPage() {
                     <tr key={`${route.originState}-${route.destinationState}`} className="border-b border-gray-100 hover:bg-gray-50">
                       <td className="py-4 px-4">
                         <div className="flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs font-semibold text-gray-600">
+                          <span className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center text-xs font-semibold text-green-600">
                             {index + 1}
                           </span>
                           <span className="font-semibold text-gray-900">{route.originState}</span>
@@ -376,9 +351,6 @@ export default function DashboardPage() {
                           </span>
                         </div>
                       </td>
-                      <td className="py-4 px-4 text-right">{formatNumber(route.orderCount)}</td>
-                      <td className="py-4 px-4 text-right text-gray-600">{formatNumber(route.totalMiles)}</td>
-                      <td className="py-4 px-4 text-right text-gray-600">{formatNumber(route.avgMiles)}</td>
                       <td className="py-4 px-4 text-right text-red-500">{formatTons(route.standardEmissions)} t</td>
                       <td className="py-4 px-4 text-right text-gray-600">{formatTons(route.actualEmissions)} t</td>
                       <td className="py-4 px-4 text-right">
@@ -386,6 +358,9 @@ export default function DashboardPage() {
                           <TrendingDown size={16} />
                           {formatTons(route.co2Saved)} t
                         </span>
+                      </td>
+                      <td className="py-4 px-4 text-right">
+                        <span className="text-green-600 font-medium">~27%</span>
                       </td>
                     </tr>
                   ))}
