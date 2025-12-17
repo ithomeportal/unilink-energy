@@ -38,8 +38,12 @@ import {
   ArcElement,
 } from 'chart.js';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
+import dynamic from 'next/dynamic';
 import type { EmissionsSummary, MonthlyTrend, StateEmissions } from '@/lib/types';
 import { formatNumber, formatPercent, formatTons } from '@/lib/emissions';
+
+// Dynamic import for USMap to avoid SSR issues
+const USMap = dynamic(() => import('@/components/USMap'), { ssr: false });
 
 // Register Chart.js components
 ChartJS.register(
@@ -756,6 +760,45 @@ export default function HomePage() {
                 <strong> over 90% of total emissions</strong>. By focusing on carrier requirements and tracking,
                 we address the largest portion of our environmental impact where we have the most influence.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive US Map Section */}
+      <section className="section-padding bg-gradient-to-br from-primary-900 via-primary-800 to-green-900">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-green-500/20 px-4 py-2 rounded-full mb-4">
+              <MapPin size={18} className="text-green-400" />
+              <span className="text-green-300 text-sm font-medium">Geographic Impact</span>
+            </div>
+            <h2 className="heading-2 text-white mb-4">Where We Make a Difference</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Our green carrier network operates across {data.summary.stateCount} states. Explore the map to see CO2 savings by region.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <USMap stateEmissions={data.stateEmissions} />
+          </div>
+
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+              <p className="text-3xl font-bold text-white">{data.summary.stateCount}</p>
+              <p className="text-green-300 text-sm">States Covered</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+              <p className="text-3xl font-bold text-white">{formatTons(data.summary.totalCO2Saved)}</p>
+              <p className="text-green-300 text-sm">Total tCO2e Saved</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+              <p className="text-3xl font-bold text-white">{formatNumber(data.summary.totalMiles)}</p>
+              <p className="text-green-300 text-sm">Green Miles</p>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+              <p className="text-3xl font-bold text-white">{formatNumber(data.summary.totalOrders)}</p>
+              <p className="text-green-300 text-sm">Shipments</p>
             </div>
           </div>
         </div>

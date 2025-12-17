@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Leaf, Mail, ExternalLink, Shield, Award, FileCheck } from 'lucide-react';
 
 const footerLinks = {
@@ -24,15 +25,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company info */}
           <div className="space-y-6">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                <Leaf size={24} className="text-white" />
-              </div>
-              <div>
-                <span className="text-xl font-bold">UNILINK</span>
-                <span className="block text-xs text-green-400">Energy & Sustainability</span>
-              </div>
+            <div className="flex items-center gap-3">
+              <Image
+                src="/unilink-logo-green.png"
+                alt="Unilink"
+                width={140}
+                height={44}
+                className="h-11 w-auto brightness-110"
+              />
             </div>
+            <p className="text-green-400 text-sm font-medium">Energy & Sustainability</p>
             <p className="text-gray-400 leading-relaxed">
               Committed to sustainable logistics through innovative policies and responsible carrier partnerships. Tracking and reducing our carbon footprint one mile at a time.
             </p>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <defs>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="50%" style="stop-color:#16a34a"/>
+      <stop offset="100%" style="stop-color:#15803d"/>
+    </linearGradient>
+    <linearGradient id="swooshGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Swoosh/orbit -->
+  <ellipse cx="200" cy="55" rx="185" ry="50" fill="none" stroke="url(#swooshGradient)" stroke-width="8" transform="rotate(-8 200 55)"/>
+
+  <!-- UNILINK text -->
+  <text x="25" y="85" font-family="Arial Black, Arial, sans-serif" font-size="58" font-weight="900" font-style="italic" fill="url(#textGradient)">
+    UNILINK
+  </text>
+
+  <!-- Underline accent -->
+  <line x1="20" y1="95" x2="230" y2="95" stroke="url(#textGradient)" stroke-width="4" stroke-linecap="round"/>
+</svg>

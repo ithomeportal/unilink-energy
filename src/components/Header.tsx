@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, Leaf, BarChart3, Target, BookOpen } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X, BarChart3, Target, Leaf, BookOpen } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: BarChart3 },
@@ -51,15 +52,17 @@ export default function Header() {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className={`flex items-center gap-2 transition-colors ${scrolled ? 'text-green-700' : 'text-white'}`}>
-              <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
-                <Leaf size={24} className="text-white" />
-              </div>
-              <div>
-                <span className="text-xl font-bold">UNILINK</span>
-                <span className={`block text-xs ${scrolled ? 'text-gray-500' : 'text-green-300'}`}>Energy & Sustainability</span>
-              </div>
-            </div>
+            <Image
+              src="/unilink-logo-green.png"
+              alt="Unilink Energy & Sustainability"
+              width={160}
+              height={50}
+              className="h-10 w-auto"
+              priority
+            />
+            <span className={`text-xs font-medium ${scrolled ? 'text-green-600' : 'text-green-300'}`}>
+              Energy & Sustainability
+            </span>
           </Link>
 
           {/* Desktop navigation */}
