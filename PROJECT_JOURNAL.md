@@ -50,7 +50,7 @@ Public-facing carbon footprint and sustainability dashboard for Unilink Transpor
 
 ---
 
-### Session 2 - Enhancements (December 17, 2024)
+### Session 2 - Enhancements (December 17, 2025)
 
 #### New Features Added
 
@@ -89,6 +89,18 @@ Public-facing carbon footprint and sustainability dashboard for Unilink Transpor
 7. **Footer Updates**
    - Added EcoVadis Rated badge with link
    - Updated logo to green version
+
+8. **Competitive Data Removal**
+   - Removed order counts and total miles from all displays
+   - Replaced with CO2 emissions metrics only
+   - Changed "Green Shipments" to "100% Green Carrier Compliance"
+   - Updated dashboard tables to show emissions instead of volume
+
+9. **Dynamic Time Period Selector**
+   - Added selector buttons: Last 12 Months, Year to Date, Current Year vs Baseline
+   - Period-specific data calculated from monthly trends
+   - Automatically handles new years (2026, 2027, etc.)
+   - Labels update dynamically based on selected period
 
 ---
 
