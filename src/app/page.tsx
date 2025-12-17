@@ -13,7 +13,12 @@ import {
   Award,
   Target,
   BarChart3,
-  RefreshCw
+  RefreshCw,
+  Calendar,
+  ArrowUpRight,
+  Shield,
+  CheckCircle,
+  ExternalLink
 } from 'lucide-react';
 import {
   Chart as ChartJS,
@@ -347,6 +352,230 @@ export default function HomePage() {
               <p className="text-green-700">
                 Together, these policies reduce our carbon footprint by approximately <strong>{formatPercent(data.summary.percentReduction)}</strong> compared to industry standard operations.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Year-over-Year Comparison Section */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full mb-4">
+              <Calendar size={18} className="text-blue-600" />
+              <span className="text-blue-700 text-sm font-medium">Year-over-Year Impact</span>
+            </div>
+            <h2 className="heading-2 text-gray-900 mb-4">2024 vs 2025: The Difference Our Policies Make</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Compare our emissions before implementing green carrier requirements (2024) with our current sustainable operations (2025).
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* 2024 Baseline */}
+            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-300/30 rounded-full -translate-y-1/2 translate-x-1/2" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-gray-500" />
+                  <span className="text-gray-600 font-medium">2024 Baseline</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-6">Before Green Policies</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-white/60 rounded-lg p-4">
+                    <p className="text-sm text-gray-500 mb-1">Standard Diesel</p>
+                    <p className="text-2xl font-bold text-gray-800">100%</p>
+                    <p className="text-xs text-gray-500">Petroleum diesel usage</p>
+                  </div>
+                  <div className="bg-white/60 rounded-lg p-4">
+                    <p className="text-sm text-gray-500 mb-1">Fleet Age</p>
+                    <p className="text-2xl font-bold text-gray-800">Mixed</p>
+                    <p className="text-xs text-gray-500">Units up to 15+ years old</p>
+                  </div>
+                  <div className="bg-white/60 rounded-lg p-4">
+                    <p className="text-sm text-gray-500 mb-1">Estimated Emissions</p>
+                    <p className="text-2xl font-bold text-gray-800">{formatTons(data.summary.totalStandardEmissions)}</p>
+                    <p className="text-xs text-gray-500">tCO2e (industry standard)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Arrow / Transformation */}
+            <div className="flex items-center justify-center">
+              <div className="bg-green-500 rounded-2xl p-8 text-white text-center shadow-xl transform hover:scale-105 transition-transform">
+                <ArrowUpRight size={48} className="mx-auto mb-4" />
+                <p className="text-4xl font-bold mb-2">{formatPercent(data.summary.percentReduction)}</p>
+                <p className="text-green-200 text-sm mb-4">Total Reduction</p>
+                <div className="border-t border-green-400/30 pt-4 mt-4">
+                  <p className="text-2xl font-bold">{formatTons(data.summary.totalCO2Saved)}</p>
+                  <p className="text-green-200 text-sm">tCO2e Saved</p>
+                </div>
+                <div className="mt-6 text-xs text-green-200">
+                  <p>Since March 2025</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 2025 Current */}
+            <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 relative overflow-hidden text-white">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-3 h-3 rounded-full bg-green-300" />
+                  <span className="text-green-200 font-medium">2025 Current</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-6">With Green Policies</h3>
+
+                <div className="space-y-4">
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                    <p className="text-sm text-green-200 mb-1">B20 Biodiesel</p>
+                    <p className="text-2xl font-bold">100%</p>
+                    <p className="text-xs text-green-200">20% biodiesel blend</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                    <p className="text-sm text-green-200 mb-1">Fleet Age</p>
+                    <p className="text-2xl font-bold">&lt; 9 Years</p>
+                    <p className="text-xs text-green-200">All units 2016 or newer</p>
+                  </div>
+                  <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4">
+                    <p className="text-sm text-green-200 mb-1">Actual Emissions</p>
+                    <p className="text-2xl font-bold">{formatTons(data.summary.totalActualEmissions)}</p>
+                    <p className="text-xs text-green-200">tCO2e (with policies)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Policy breakdown */}
+          <div className="mt-12 grid md:grid-cols-2 gap-6">
+            <div className="flex items-center gap-4 bg-green-50 rounded-xl p-6">
+              <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                <Droplets size={28} className="text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900">B20 Biodiesel Impact</p>
+                <p className="text-2xl font-bold text-green-600">{formatTons(data.summary.b20Savings)} tCO2e saved</p>
+                <p className="text-sm text-gray-500">~17% reduction from standard diesel</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 bg-blue-50 rounded-xl p-6">
+              <div className="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                <Truck size={28} className="text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900">Modern Fleet Impact</p>
+                <p className="text-2xl font-bold text-blue-600">{formatTons(data.summary.fleetSavings)} tCO2e saved</p>
+                <p className="text-sm text-gray-500">~12% efficiency improvement</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* EcoVadis Certification Section */}
+      <section className="section-padding bg-gradient-to-br from-slate-900 to-slate-800">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left content */}
+            <div className="text-white">
+              <div className="inline-flex items-center gap-2 bg-yellow-500/20 px-4 py-2 rounded-full mb-6">
+                <Shield size={18} className="text-yellow-400" />
+                <span className="text-yellow-300 text-sm font-medium">Sustainability Commitment</span>
+              </div>
+
+              <h2 className="heading-2 mb-6">
+                EcoVadis <span className="text-yellow-400">Certified</span>
+              </h2>
+
+              <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                As part of our commitment to sustainable logistics, Unilink Transportation participates in the
+                <strong className="text-yellow-400"> EcoVadis Business Sustainability Ratings</strong> program.
+                EcoVadis is the world&apos;s most trusted provider of business sustainability ratings.
+              </p>
+
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <CheckCircle size={24} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium">Logistics Industry Program</p>
+                    <p className="text-gray-400 text-sm">Part of EcoVadis&apos;s specialized logistics and transportation sustainability program</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle size={24} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium">Independent Assessment</p>
+                    <p className="text-gray-400 text-sm">Third-party verification of our environmental, labor, and ethical practices</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle size={24} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium">Continuous Improvement</p>
+                    <p className="text-gray-400 text-sm">Regular assessments driving our sustainability roadmap</p>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://ecovadis.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-yellow-500 text-slate-900 font-semibold px-6 py-3 rounded-lg hover:bg-yellow-400 transition-colors"
+              >
+                Learn About EcoVadis
+                <ExternalLink size={18} />
+              </a>
+            </div>
+
+            {/* Right content - EcoVadis info cards */}
+            <div className="space-y-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                    <Award size={24} className="text-yellow-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">What is EcoVadis?</h3>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  EcoVadis provides holistic sustainability ratings that cover Environment, Labor & Human Rights,
+                  Ethics, and Sustainable Procurement. Over 130,000+ companies worldwide are rated, including
+                  the world&apos;s largest brands and their supply chains.
+                </p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <Truck size={24} className="text-green-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">Logistics Industry Focus</h3>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  The transportation and logistics sector has unique environmental challenges. EcoVadis&apos;s
+                  logistics program assesses companies on industry-specific criteria including fleet emissions,
+                  fuel efficiency, and sustainable supply chain management.
+                </p>
+              </div>
+
+              <div className="bg-gradient-to-r from-yellow-500/20 to-green-500/20 rounded-2xl p-6 border border-yellow-500/30">
+                <div className="flex items-center gap-3 mb-3">
+                  <Target size={24} className="text-yellow-400" />
+                  <h3 className="font-semibold text-white">Our Commitment</h3>
+                </div>
+                <p className="text-gray-200 text-sm leading-relaxed">
+                  Participation in EcoVadis demonstrates our commitment to transparency and continuous improvement
+                  in sustainability. Our B20 biodiesel and modern fleet requirements are key initiatives that
+                  contribute to our sustainability performance.
+                </p>
+              </div>
             </div>
           </div>
         </div>

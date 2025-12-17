@@ -46,7 +46,7 @@ export async function GET() {
     // Query orders from March 2025 onwards (when B20 and fleet age policy started)
     const ordersQuery = `
       SELECT
-        order_date,
+        ordered_date,
         origin_state,
         destination_state,
         origin_lat,
@@ -55,18 +55,18 @@ export async function GET() {
         dest_lon,
         COALESCE(miles, 0) as miles
       FROM mcleod_gld_budget_report_v4
-      WHERE order_date >= '2025-03-01'
+      WHERE ordered_date >= '2025-03-01'
         AND origin_state IS NOT NULL
         AND destination_state IS NOT NULL
         AND origin_lat IS NOT NULL
         AND origin_lon IS NOT NULL
         AND dest_lat IS NOT NULL
         AND dest_lon IS NOT NULL
-      ORDER BY order_date DESC
+      ORDER BY ordered_date DESC
     `;
 
     interface OrderRow {
-      order_date: Date;
+      ordered_date: Date;
       origin_state: string;
       destination_state: string;
       origin_lat: number;
@@ -144,7 +144,7 @@ export async function GET() {
       destData.inboundRoutes++;
 
       // Monthly data
-      const orderDate = new Date(order.order_date);
+      const orderDate = new Date(order.ordered_date);
       const monthKey = `${orderDate.getFullYear()}-${String(orderDate.getMonth() + 1).padStart(2, '0')}`;
       if (!monthlyDataMap.has(monthKey)) {
         monthlyDataMap.set(monthKey, { orderCount: 0, totalMiles: 0 });

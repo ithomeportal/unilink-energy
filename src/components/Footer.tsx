@@ -100,6 +100,17 @@ export default function Footer() {
       <div className="border-t border-primary-800">
         <div className="container-custom py-6">
           <div className="flex flex-wrap items-center justify-center gap-8 text-gray-400 text-sm">
+            <a
+              href="https://ecovadis.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:text-yellow-400 transition-colors"
+            >
+              <div className="w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                <Award size={18} className="text-yellow-500" />
+              </div>
+              <span className="font-medium">EcoVadis Rated</span>
+            </a>
             <div className="flex items-center gap-2">
               <Shield size={24} className="text-green-500" />
               <span>EPA Standards Compliant</span>
