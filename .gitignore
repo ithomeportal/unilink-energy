@@ -37,3 +37,45 @@ next-env.d.ts
 .vscode/
 *.swp
 *.swo
+
+# ===========================================
+# DOCUMENTATION - KEEP LOCAL ONLY
+# ===========================================
+# All documentation files excluded from repository
+# These remain on local machines only for security/IP protection
+
+# Markdown documentation
+*.md
+!README.md
+
+# Documentation folders
+docs/
+documentation/
+doc/
+
+# Design and specification files
+*.pdf
+*.docx
+*.doc
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+
+# Technical specifications
+CHANGELOG*
+CONTRIBUTING*
+ARCHITECTURE*
+DESIGN*
+SPECIFICATION*
+ROADMAP*
+
+# API documentation
+swagger/
+openapi/
+api-docs/
+
+# Any other documentation patterns
+*.txt
+!requirements.txt
+!robots.txt
