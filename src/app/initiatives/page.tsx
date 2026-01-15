@@ -14,7 +14,9 @@ import {
   Users,
   Truck,
   BarChart3,
-  ArrowRight
+  ArrowRight,
+  ExternalLink,
+  Globe
 } from 'lucide-react';
 
 const policies = [
@@ -254,6 +256,137 @@ export default function InitiativesPage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications & Partnerships */}
+      <section className="section-padding bg-gradient-to-br from-slate-900 to-blue-900">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-green-500/20 px-4 py-2 rounded-full mb-4">
+              <Award size={18} className="text-green-400" />
+              <span className="text-green-300 text-sm font-medium">Certifications & Partnerships</span>
+            </div>
+            <h2 className="heading-2 text-white mb-4">Our Sustainability Credentials</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              We participate in industry-leading sustainability programs that hold us accountable and drive continuous improvement.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* SmartWay Card */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center">
+                  <Truck size={32} className="text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">EPA SmartWay Partner</h3>
+                  <p className="text-green-400 text-sm">U.S. Government Program</p>
+                </div>
+              </div>
+              <p className="text-gray-300 mb-6">
+                As an EPA SmartWay Partner, we are part of a government program that helps companies
+                measure, benchmark, and improve freight transportation efficiency. SmartWay partners have
+                avoided 170 million metric tons of CO2 emissions since 2004.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-white/5 rounded-lg p-4 text-center">
+                  <p className="text-2xl font-bold text-green-400">4,000+</p>
+                  <p className="text-gray-400 text-xs">Partner Companies</p>
+                </div>
+                <div className="bg-white/5 rounded-lg p-4 text-center">
+                  <p className="text-2xl font-bold text-blue-400">$55.4B</p>
+                  <p className="text-gray-400 text-xs">Fuel Costs Saved</p>
+                </div>
+              </div>
+              <div className="space-y-2 mb-6">
+                <div className="flex items-center gap-2 text-gray-300 text-sm">
+                  <CheckCircle size={16} className="text-green-400" />
+                  <span>EPA-verified emissions tracking</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300 text-sm">
+                  <CheckCircle size={16} className="text-green-400" />
+                  <span>Access to SmartWay carrier database</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300 text-sm">
+                  <CheckCircle size={16} className="text-green-400" />
+                  <span>Supports GHG Protocol & CDP reporting</span>
+                </div>
+              </div>
+              <a
+                href="https://www.epa.gov/smartway"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 font-medium"
+              >
+                Learn About SmartWay
+                <ExternalLink size={16} />
+              </a>
+            </div>
+
+            {/* EcoVadis Card */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                  <Globe size={32} className="text-yellow-400" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-white">EcoVadis Certified</h3>
+                  <p className="text-yellow-400 text-sm">Global Sustainability Ratings</p>
+                </div>
+              </div>
+              <p className="text-gray-300 mb-6">
+                EcoVadis is the world&apos;s most trusted provider of business sustainability ratings.
+                Our participation demonstrates commitment to transparency and continuous improvement
+                across Environment, Labor, Ethics, and Sustainable Procurement.
+              </p>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-white/5 rounded-lg p-4 text-center">
+                  <p className="text-2xl font-bold text-yellow-400">130K+</p>
+                  <p className="text-gray-400 text-xs">Companies Rated</p>
+                </div>
+                <div className="bg-white/5 rounded-lg p-4 text-center">
+                  <p className="text-2xl font-bold text-blue-400">175+</p>
+                  <p className="text-gray-400 text-xs">Countries Covered</p>
+                </div>
+              </div>
+              <div className="space-y-2 mb-6">
+                <div className="flex items-center gap-2 text-gray-300 text-sm">
+                  <CheckCircle size={16} className="text-yellow-400" />
+                  <span>Independent third-party assessment</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300 text-sm">
+                  <CheckCircle size={16} className="text-yellow-400" />
+                  <span>Covers 21 CSR criteria</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-300 text-sm">
+                  <CheckCircle size={16} className="text-yellow-400" />
+                  <span>Industry-specific logistics assessments</span>
+                </div>
+              </div>
+              <a
+                href="https://ecovadis.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-yellow-400 hover:text-yellow-300 font-medium"
+              >
+                Learn About EcoVadis
+                <ExternalLink size={16} />
+              </a>
+            </div>
+          </div>
+
+          {/* Combined Impact Statement */}
+          <div className="mt-12 bg-gradient-to-r from-green-500/20 to-yellow-500/20 rounded-2xl p-8 border border-green-500/30 text-center">
+            <h3 className="text-xl font-bold text-white mb-4">Dual Commitment to Sustainability</h3>
+            <p className="text-gray-300 max-w-3xl mx-auto">
+              Our participation in both EPA SmartWay and EcoVadis programs demonstrates our commitment to
+              government-verified freight efficiency standards and globally recognized sustainability practices.
+              Together, these certifications provide comprehensive coverage of our environmental impact
+              and continuous improvement efforts.
+            </p>
           </div>
         </div>
       </section>

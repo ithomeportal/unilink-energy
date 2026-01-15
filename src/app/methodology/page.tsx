@@ -295,7 +295,7 @@ export default function MethodologyPage() {
               >
                 <div>
                   <p className="font-semibold text-gray-900">EPA SmartWay Program</p>
-                  <p className="text-gray-600 text-sm">Freight transportation efficiency benchmarks</p>
+                  <p className="text-gray-600 text-sm">Freight transportation efficiency benchmarks - Unilink is a SmartWay Partner</p>
                 </div>
                 <ExternalLink size={20} className="text-gray-400" />
               </a>

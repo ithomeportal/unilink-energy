@@ -664,6 +664,126 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* SmartWay Partner Section */}
+      <section className="section-padding bg-gradient-to-br from-blue-900 to-blue-800">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left content */}
+            <div className="text-white">
+              <div className="inline-flex items-center gap-2 bg-green-500/20 px-4 py-2 rounded-full mb-6">
+                <Truck size={18} className="text-green-400" />
+                <span className="text-green-300 text-sm font-medium">EPA Partnership</span>
+              </div>
+
+              <h2 className="heading-2 mb-6">
+                EPA <span className="text-green-400">SmartWay</span> Partner
+              </h2>
+
+              <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                Unilink Transportation is a proud participant in the
+                <strong className="text-green-400"> EPA SmartWay Transport Partnership</strong> -
+                a U.S. government program that helps companies improve freight efficiency
+                and reduce environmental impact across their supply chains.
+              </p>
+
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <CheckCircle size={24} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium">Verified Freight Performance</p>
+                    <p className="text-gray-400 text-sm">EPA-verified tracking of emissions, fuel efficiency, and environmental metrics</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle size={24} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium">Carrier Selection Standards</p>
+                    <p className="text-gray-400 text-sm">We prioritize SmartWay-registered carriers in our network for cleaner freight operations</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <CheckCircle size={24} className="text-green-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="font-medium">CSR & ESG Reporting</p>
+                    <p className="text-gray-400 text-sm">SmartWay data supports GHG Protocol, CDP, and Global Reporting Initiative standards</p>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://www.epa.gov/smartway"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-green-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-400 transition-colors"
+              >
+                Learn About SmartWay
+                <ExternalLink size={18} />
+              </a>
+            </div>
+
+            {/* Right content - SmartWay info cards */}
+            <div className="space-y-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <Award size={24} className="text-green-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">What is SmartWay?</h3>
+                  </div>
+                </div>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Launched in 2004, EPA SmartWay is a public-private partnership helping nearly 4,000 companies
+                  measure, benchmark, and improve supply chain sustainability. Partners have avoided 170 million
+                  metric tons of CO2 emissions and saved $55.4 billion in fuel costs.
+                </p>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <BarChart3 size={24} className="text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">Program Impact Since 2004</h3>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="bg-white/5 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-green-400">170M</p>
+                    <p className="text-gray-400 text-xs">Metric Tons CO2 Avoided</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-blue-400">$55.4B</p>
+                    <p className="text-gray-400 text-xs">Fuel Costs Saved</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-green-400">397M</p>
+                    <p className="text-gray-400 text-xs">Barrels of Oil Saved</p>
+                  </div>
+                  <div className="bg-white/5 rounded-lg p-3 text-center">
+                    <p className="text-2xl font-bold text-blue-400">4,000+</p>
+                    <p className="text-gray-400 text-xs">Partner Companies</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-2xl p-6 border border-green-500/30">
+                <div className="flex items-center gap-3 mb-3">
+                  <Target size={24} className="text-green-400" />
+                  <h3 className="font-semibold text-white">Why SmartWay Matters for 3PLs</h3>
+                </div>
+                <p className="text-gray-200 text-sm leading-relaxed">
+                  As a logistics provider, our participation in SmartWay demonstrates commitment to sustainable
+                  freight practices. It enables us to track Scope 3 emissions, select efficient carriers, and
+                  provide verified environmental data to our shipper partners and their sustainability reports.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* GHG Protocol Scopes Section */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
