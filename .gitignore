@@ -39,14 +39,21 @@ next-env.d.ts
 *.swo
 
 # ===========================================
-# DOCUMENTATION - KEEP LOCAL ONLY
+# DOCUMENTATION - KEEP LOCAL ONLY (NO EXCEPTIONS)
 # ===========================================
-# All documentation files excluded from repository
-# These remain on local machines only for security/IP protection
+# ALL documentation files excluded from repository
+# These remain on local machines only for IP protection
+# © UNILINK Transportation INC - All Rights Reserved
 
-# Markdown documentation
+# ALL Markdown files - NO EXCEPTIONS
 *.md
-!README.md
+README*
+CHANGELOG*
+CONTRIBUTING*
+ARCHITECTURE*
+DESIGN*
+SPECIFICATION*
+ROADMAP*
 
 # Documentation folders
 docs/
@@ -62,20 +69,16 @@ doc/
 *.pptx
 *.ppt
 
-# Technical specifications
-CHANGELOG*
-CONTRIBUTING*
-ARCHITECTURE*
-DESIGN*
-SPECIFICATION*
-ROADMAP*
-
 # API documentation
 swagger/
 openapi/
 api-docs/
 
-# Any other documentation patterns
+# Text files (except essential config)
 *.txt
-!requirements.txt
-!robots.txt
+
+# Memory and journal files
+*MEMORY*
+*JOURNAL*
+*memory*
+*journal*
