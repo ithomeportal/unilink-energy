@@ -60,7 +60,8 @@ export function calculateTotalSavings(miles: number): {
 }
 
 // Format number with commas
-export function formatNumber(num: number, decimals: number = 0): string {
+export function formatNumber(num: number | null | undefined, decimals: number = 0): string {
+  if (num == null) return '0';
   return num.toLocaleString('en-US', {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
@@ -68,12 +69,14 @@ export function formatNumber(num: number, decimals: number = 0): string {
 }
 
 // Format as percentage
-export function formatPercent(num: number, decimals: number = 1): string {
+export function formatPercent(num: number | null | undefined, decimals: number = 1): string {
+  if (num == null) return '0%';
   return `${num.toFixed(decimals)}%`;
 }
 
 // Format as metric tons
-export function formatTons(num: number): string {
+export function formatTons(num: number | null | undefined): string {
+  if (num == null) return '0';
   if (num >= 1000000) {
     return `${(num / 1000000).toFixed(2)}M`;
   } else if (num >= 1000) {
