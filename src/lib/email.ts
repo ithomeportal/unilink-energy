@@ -1,6 +1,18 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build-time errors when env vars aren't available
+let resend: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not set');
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'noreply@unilinkportal.com';
 const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'ithome@unilinkportal.com';
@@ -10,7 +22,7 @@ const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'ithome@unilinkport
  */
 export async function sendVerificationEmail(to: string, code: string): Promise<boolean> {
   try {
-    const { error } = await resend.emails.send({
+    const { error } = await getResendClient().emails.send({
       from: `Unilink Transportation <${FROM_EMAIL}>`,
       to: [to],
       subject: 'Your Carbon Footprint Portal Verification Code',
@@ -94,7 +106,7 @@ export async function sendLoginNotification(
       timeStyle: 'long',
     });
 
-    const { error } = await resend.emails.send({
+    const { error } = await getResendClient().emails.send({
       from: `Unilink Transportation <${FROM_EMAIL}>`,
       to: [NOTIFICATION_EMAIL],
       subject: `[Carbon Portal] New Login: ${email}`,
