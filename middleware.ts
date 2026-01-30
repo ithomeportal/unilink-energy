@@ -20,6 +20,8 @@ const PUBLIC_PREFIXES = [
   '/favicon',
   '/images',
   '/fonts',
+  '/public',
+  '/api/emissions', // Allow emissions API for demo purposes
 ];
 
 function isPublicPath(pathname: string): boolean {
