@@ -47,21 +47,14 @@ export async function GET() {
     const ordersQuery = `
       SELECT
         ordered_date,
-        origin_state,
-        destination_state,
-        origin_lat,
-        origin_lon,
-        dest_lat,
-        dest_lon,
-        COALESCE(miles, 0) as miles
+        origin_state_id as origin_state,
+        dest_state_id as destination_state,
+        COALESCE(bill_distance, 0) as miles
       FROM mcleod_gld_budget_report_v4
       WHERE ordered_date >= '2025-03-01'
-        AND origin_state IS NOT NULL
-        AND destination_state IS NOT NULL
-        AND origin_lat IS NOT NULL
-        AND origin_lon IS NOT NULL
-        AND dest_lat IS NOT NULL
-        AND dest_lon IS NOT NULL
+        AND origin_state_id IS NOT NULL
+        AND dest_state_id IS NOT NULL
+        AND bill_distance > 0
       ORDER BY ordered_date DESC
     `;
 
@@ -69,10 +62,6 @@ export async function GET() {
       ordered_date: Date;
       origin_state: string;
       destination_state: string;
-      origin_lat: number;
-      origin_lon: number;
-      dest_lat: number;
-      dest_lon: number;
       miles: number;
     }
 
@@ -110,16 +99,7 @@ export async function GET() {
     let totalOrders = orders.length;
 
     for (const order of orders) {
-      // Calculate distance if not provided
-      let miles = order.miles;
-      if (!miles || miles === 0) {
-        miles = calculateDistance(
-          order.origin_lat,
-          order.origin_lon,
-          order.dest_lat,
-          order.dest_lon
-        );
-      }
+      const miles = order.miles;
 
       totalMiles += miles;
 
